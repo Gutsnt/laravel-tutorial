@@ -20,6 +20,21 @@ class UserSeeder extends Seeder
            'email' => 'deulios.net',
            'password' => bcrypt('laravel'),
            'profession_id' => $professionId,
+           'is_admin' => true,
+
+         ]);
+      User::create([
+           'name' => 'Another User',
+           'email' => 'another@user.net',
+           'password' => bcrypt('laravel'),
+           'profession_id' => $professionId,
+
+         ]);
+      User::create([
+           'name' => 'Another User',
+           'email' => 'another2@user.net',
+           'password' => bcrypt('laravel'),
+           'profession_id' => null,
 
          ]);
     }
