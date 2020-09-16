@@ -1,20 +1,25 @@
-<!DOCTYPE html>
-<html lang="en" dir="ltr">
-  <head>
-    <meta charset="utf-8">
-    <title>Listado de Usuarios - nombre-proyecto</title>
-  </head>
-  <body>
-    <h1>{{ $title }}<h1>
+@extends('layout')
 
-     @if(! empty($users))
-    <ul>
-      @foreach ($users as $user)
-          <li>{{ $user }}</li>
-      @endforeach
-    </ul>
-     @else
-        <p>No hay usuaros registrados.</p>
-      @endif
-  </body>
-</html>
+
+@section('content')
+
+      <div class="row mt-3">
+        <div class="col-9">
+          <h1>{{ $title }}<h1>
+
+          <ul>
+            @forelse ($users as $user)
+                <li>{{ $user }}</li>
+            @empty
+                <li>No hay usuaros registrados.</li>
+              @endforelse
+          </ul>
+
+        </div>
+        <div class="col-3">
+           @include('sidebar')
+
+         </div>
+      </div>
+
+@endsection
