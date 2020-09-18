@@ -72,7 +72,7 @@
 </header>
 
 <!-- Begin page content -->
-<main role="main" class="flex-shrink-0">
+<main role="main" class="flex-shrink-0 container">
     @yield('content')
 </main>
 
