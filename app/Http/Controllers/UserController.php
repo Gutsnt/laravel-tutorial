@@ -20,11 +20,11 @@ class UserController extends Controller
 
      $title = 'Listado de usuario';
 
-     return view('users', compact('title','users'));
+     return view('users.index', compact('title','users'));
   }
   Public function show($id)
   {
-   return view('users-show', compact('id'));
+   return view('users.show', compact('id'));
   }
   Public function create()
  {
