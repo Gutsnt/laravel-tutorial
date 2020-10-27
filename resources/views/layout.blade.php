@@ -6,7 +6,7 @@
     <meta name="description" content="">
     <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
     <meta name="generator" content="Jekyll v4.1.1">
-    <title>@yield('title') - Styde.net<</title>
+    <title>@yield('title')</title>
 
     <link rel="canonical" href="https://getbootstrap.com/docs/4.5/examples/sticky-footer-navbar/">
 
@@ -73,13 +73,13 @@
 
 <!-- Begin page content -->
 <main role="main" class="flex-shrink-0 container">
-     <div class="row mt-3">
+     <div class="row mt-5">
         <div class="col-8">
             @yield('content')
         </div>
         <div class="col-4">
             @section('sidebar')
-                <h2>Barra lateral</h2>
+                <h2></h2>
             @show
         </div>
     </div>
