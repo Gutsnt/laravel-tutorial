@@ -6,5 +6,5 @@
 @section('content')
     <h1>Usuario #{{ $id }}</h1>
 
-    Mostrando detalle del usuario: {{ $id }}
+    Mostrar detalles del usuario: {{ $id }}
 @endsection
