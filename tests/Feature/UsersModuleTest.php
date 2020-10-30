@@ -51,7 +51,7 @@ class UsersModuleTest extends TestCase
              ->assertSee('Charlie Mendoza');
     }
 /**@test*/
-   function it_loads_the_new_users_page()
+   function it_loads__the_new_users_page()
  {
      $this->get('/usuarios/nuevo')
           ->assertStatus(200)
