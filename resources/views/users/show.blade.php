@@ -8,4 +8,8 @@
 
     <p>Nombre del usuario: {{ $user->name }}</p>
     <p>Correo electrónico: {{ $user->email }}</p>
+
+    <p>
+            <a href="{{ rout('users')}}"> Regresar al listado de usuario </a>
+    </p>
 @endsection
