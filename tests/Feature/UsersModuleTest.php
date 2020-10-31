@@ -30,12 +30,12 @@ class UsersModuleTest extends TestCase
             ->assertStatus('joel')
             ->assertStatus('ellie');
       }
-   /** @test */
+ /** @test */
    function it_shows_a_default_message_if_the_users_list_is_empty()
     {
         $this->get('/usuarios')
              ->assertStatus(200)
-             ->assertSee('No hay usuarios registrados');
+             ->assertSee('No hay usuarios registrados.');
     }
 
 
@@ -50,6 +50,14 @@ class UsersModuleTest extends TestCase
              ->assertStatus(200)
              ->assertSee('Charlie Mendoza');
     }
+ /**@test*/
+   function it_displays_a_404_error_if_the_user_is_not_found()
+     {
+     $this->get('/usuarios/999')
+          ->assertStatus(404)
+          ->assertStatus('Pagina no encontrada');
+    }
+
 /**@test*/
    function it_loads__the_new_users_page()
  {

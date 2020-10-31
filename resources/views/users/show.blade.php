@@ -10,6 +10,6 @@
     <p>Correo electrónico: {{ $user->email }}</p>
 
     <p>
-            <a href="{{ rout('users')}}"> Regresar al listado de usuario </a>
+            <a href="{{ route('users')}}"> Regresar al listado de usuario </a>
     </p>
 @endsection

@@ -8,7 +8,7 @@ Route::get('/usuarios','UserController@index')
 
 Route::get('/usuarios/{id}', 'UserController@show')
     ->where('id', '[0-9]+')
-      ->name('users.show');
+    ->name('users.show');
 
 Route::get('/usuarios/nuevo', 'UserController@create')
       ->name('users.create');
