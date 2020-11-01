@@ -20,5 +20,4 @@
 @section('sidebar')
     @parent
 
-    <h2></h2>
 @endsection

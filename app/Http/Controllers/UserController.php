@@ -12,7 +12,7 @@ class UserController extends Controller
      $users = User::all();
 
 
-     $title = 'Listado de usuario';
+     $title = 'Listado de usuarios';
 
      return view('users.index', compact('title','users'));
   }
@@ -25,17 +25,16 @@ class UserController extends Controller
     return view('users.create');
  }
 
-  Public function store()
- {
+  public function store()
+    {
+        $data = request()->all();
 
-    $data = Request()->all();
+        User::create([
+            'name' => $data['name'],
+            'email' => $data['email'],
+            'password' => bcrypt($data['password'])
+        ]);
 
-    User::create([
-       'name' => $data[name],
-      'email' => $data[email],
-      'password' => bcrypt(data['password'])
-]);
-     return redirect('usuarios');
- }
-
+        return redirect()->route('users.index');
+    }
 }

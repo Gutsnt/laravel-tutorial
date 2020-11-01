@@ -2,34 +2,33 @@
 
 namespace Tests\Feature;
 use App\User;
-use Tests\TestCase;
-// use Illuminate\Foundation\Testing\WithFaker;
-use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\DB;
+use Tests\TestCase;
+use Illuminate\Foundation\Testing\RefreshDatabase;
+
 
 
 class UsersModuleTest extends TestCase
 {
 
        use RefreshDatabase;
-    /**@test*/
-  function it_shows_the_users_list()
+    /** @test*/
+    function it_shows_the_users_list()
     {
         factory(User::class)->create([
-              'name' => 'Jose',
+            'name' => 'Joel',
+        ]);
 
-
-]);
         factory(User::class)->create([
-               'name' => 'ellie',
-]);
+            'name' => 'Ellie',
+        ]);
 
         $this->get('/usuarios')
             ->assertStatus(200)
-            ->assertStatus('Listado de usuarios')
-            ->assertStatus('joel')
-            ->assertStatus('ellie');
-      }
+            ->assertSee('Listado de usuarios')
+            ->assertSee('Joel')
+            ->assertSee('Ellie');
+    }
  /** @test */
    function it_shows_a_default_message_if_the_users_list_is_empty()
     {
@@ -50,15 +49,15 @@ class UsersModuleTest extends TestCase
              ->assertStatus(200)
              ->assertSee('Charlie Mendoza');
     }
- /**@test*/
+ /** @test*/
    function it_displays_a_404_error_if_the_user_is_not_found()
      {
      $this->get('/usuarios/999')
           ->assertStatus(404)
-          ->assertStatus('Pagina no encontrada');
+          ->assertSee('Pagina no encontrada');
     }
 
-/**@test*/
+/** @test*/
    function it_loads__the_new_users_page()
  {
      $this->get('/usuarios/nuevo')
@@ -66,21 +65,21 @@ class UsersModuleTest extends TestCase
           ->assertSee('Crear nuevo usuario');
  }
 
-/**@test*/
+/** @test */
    function it_creates_a_new_user()
- {
-     $this->post('/usuarios', [
-              'name' => 'Charlie',
-              'email' => 'deulios.net',
-              'password' =>'123456'
-             ])->assertSeeRedirect(route('users.index'));
+    {
+        $this->withoutExceptionHandling();
 
-           $this->assertCredentials([
-              'name' => 'charlie',
-              'email' => 'deulios.net',
-               'password' => '123456',
-]);
- }
+        $this->post('/usuarios/', [
+            'name' => 'Charlie',
+            'email' => 'deulios.net',
+            'password' => '123456'
+        ])->assertRedirect('usuarios');
 
-
+        $this->assertCredentials([
+            'name' => 'Charlie',
+            'email' => 'deulios.net',
+            'password' => '123456',
+        ]);
+    }
 }
