@@ -4,6 +4,7 @@ use App\User;
 use App\Profession;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
+
 class UserSeeder extends Seeder
 {
     /**
@@ -18,7 +19,7 @@ class UserSeeder extends Seeder
 
       factory(User::class)->create([
            'name'  => 'Charlie',
-           'email' => 'deulios.net',
+           'email' => 'deulios@gmail.net',
            'password' => bcrypt('laravel'),
            'profession_id' => $professionId,
            'is_admin' => true,

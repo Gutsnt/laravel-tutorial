@@ -28,7 +28,9 @@ class UserController extends Controller
   public function store()
     {
         $data = request()->validate([
-            'name' => 'required'
+            'name' => 'required',
+            'email' => 'required',
+            'password' => 'required'
 ], [
    'name.required' => 'El campo nombre es obligatorio'
 

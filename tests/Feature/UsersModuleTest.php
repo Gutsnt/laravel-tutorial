@@ -65,28 +65,28 @@ class UsersModuleTest extends TestCase
           ->assertSee('Crear nuevo usuario');
  }
 
-/** @test */
+/** @test*/
    function it_creates_a_new_user()
     {
         $this->withoutExceptionHandling();
 
         $this->post('/usuarios/',[
             'name' => 'Charlie',
-            'email' => 'deulios.net',
+            'email' => 'deulios@gmail.net',
             'password' => '123456'
         ])->assertRedirect('usuarios');
 
         $this->assertCredentials([
             'name' => 'Charlie',
-            'email' => 'deulios.net',
+            'email' => 'deulios@gmail.net',
             'password' => '123456',
         ]);
     }
-/** @test */
+/** @test*/
      function the_name_is_required()
   {
         $this->from('usuarios/nuevo')->post('/usuarios/', [
-            'email' => 'deulios.net',
+            'email' => 'deulios@gmail.net',
             'password' => '123456'
         ])->assertRedirect('usuarios/nuevo')
           ->assertSessionHasErrors(['name' => 'El campo nombre es obligatorio']);
