@@ -18,7 +18,7 @@
            <br>
           <label for="password">Password:</label>
           <input type="password" name="password" id="password" placeholder="mayor a 6 caracteres">
-
+           <br>
           <button type="submit">Crear Usuario</button>
 
         </form>
