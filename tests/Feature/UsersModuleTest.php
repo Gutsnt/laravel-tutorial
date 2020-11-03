@@ -86,13 +86,75 @@ class UsersModuleTest extends TestCase
      function the_name_is_required()
   {
         $this->from('usuarios/nuevo')->post('/usuarios/', [
+            'name' =>'',
             'email' => 'deulios@gmail.net',
             'password' => '123456'
         ])->assertRedirect('usuarios/nuevo')
           ->assertSessionHasErrors(['name' => 'El campo nombre es obligatorio']);
 
         $this->assertEquals(0, User::count());
-        // $this->assertDataBaseMissing('users', ['email' => 'deulios.net']);
+
+
+ }
+
+/** @test*/
+     function the_password_is_required()
+  {
+        $this->from('usuarios/nuevo')->post('/usuarios/', [
+            'name' =>'Charlie',
+            'email' => 'deulios@gmail.net',
+            'password' => ''
+        ])->assertRedirect('usuarios/nuevo')
+          ->assertSessionHasErrors(['password']);
+
+        $this->assertEquals(0, User::count());
+
+
+ }
+
+/** @test*/
+     function the_email_is_required()
+  {
+        $this->from('usuarios/nuevo')->post('/usuarios/', [
+            'name' =>'Charlie',
+            'email' => '',
+            'password' => '123456'
+        ])->assertRedirect('usuarios/nuevo')
+          ->assertSessionHasErrors(['email']);
+
+        $this->assertEquals(0, User::count());
+
+
+ }
+/** @test*/
+     function the_email_must_be_valid()
+  {
+        $this->from('usuarios/nuevo')->post('/usuarios/', [
+            'name' =>'Charlie',
+            'email' => 'correo-no-valido',
+            'password' => '123456'
+        ])->assertRedirect('usuarios/nuevo')
+          ->assertSessionHasErrors(['email']);
+
+        $this->assertEquals(0, User::count());
+
+
+ }
+/** @test*/
+     function the_email_must_be_unique()
+  {
+      factory(User::class)->create([
+            'email' => 'duilioo@styde.net'
+        ]);
+        $this->from('usuarios/nuevo')->post('/usuarios/', [
+            'name' =>'Charlie',
+            'email' => 'duilioo@styde.net',
+            'password' => '123456'
+        ])->assertRedirect('usuarios/nuevo')
+          ->assertSessionHasErrors(['email']);
+
+        $this->assertEquals(1, User::count());
+
 
  }
 }

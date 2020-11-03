@@ -28,9 +28,15 @@
            <br>
           <label for="email">Correo electrónico:</label>
           <input type="email" name="email" id="email" placeholder="juan@example.com" value="{{ old('email')}}">
+          @if($errors->has('email'))
+                 <p>{{ $errors->first('email')}}</p>
+          @endif
            <br>
           <label for="password">Password:</label>
           <input type="password" name="password" id="password" placeholder="mayor a 6 caracteres">
+          @if($errors->has('password'))
+                 <p>{{ $errors->first('password')}}</p>
+          @endif
            <br>
           <button type="submit">Crear Usuario</button>
 

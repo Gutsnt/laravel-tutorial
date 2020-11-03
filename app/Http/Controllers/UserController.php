@@ -29,10 +29,16 @@ class UserController extends Controller
     {
         $data = request()->validate([
             'name' => 'required',
-            'email' => 'required',
-            'password' => 'required'
+            'email' => ['required', 'email', 'unique:users,email'],
+            'password' => ['required', 'alpha_num','between:6,14']
 ], [
-   'name.required' => 'El campo nombre es obligatorio'
+   'name.required' => 'El campo nombre es obligatorio',
+   'email.required' => 'El campo email es obligatorio',
+   'email.email' => 'El correo no es valido',
+   'email.uniqued' => 'El correo ya esta en uso',
+   'password.required' => 'El campo password es obligatorio',
+   'password.alpha_num' => 'Debe solo tener caractes alfanumericos',
+   'password.between' => 'El password debe ser entre 6 y 14 digitos',
 
 ]);
 
