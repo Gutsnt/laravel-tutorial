@@ -50,4 +50,9 @@ class UserController extends Controller
 
         return redirect()->route('users.index');
     }
+
+Public function edit(User $user)
+  {
+        return view('users.edit', ['user' => $user]);
+  }
 }

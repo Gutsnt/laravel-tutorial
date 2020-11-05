@@ -157,4 +157,18 @@ class UsersModuleTest extends TestCase
 
 
  }
+/** @test*/
+   function it_loads__the_edit_user_page()
+ {
+
+    $user = factory(User::class)->create();
+
+    $this->get("/usuarios/{$user->id}/editar")
+          ->assertStatus(200)
+          ->assertViewIs('users.edit')
+          ->assertSee('Editar Usuario')
+          ->assertViewHas('user', function ($viewUser) use ($user) {
+                return $viewUser->id === $user->id;
+            });
+ }
 }
