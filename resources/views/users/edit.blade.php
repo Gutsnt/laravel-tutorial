@@ -16,22 +16,20 @@
       </div>
          @endif
 
-        <form method="POST" action="{{ url('usuarios')}}">
+        <form method="POST" action="{{ url("usuarios/{$user->id}") }}">
+            {{ method_field('PUT') }}
             {{ csrf_field() }}
 
-          <label for="name">Nombre:</label>
-          <input type="text" name="name" id="name" placeholder="Juan perez" value="{{ old('name', $user->name)}}">
-
-           <br>
-          <label for="email">Correo electrónico:</label>
-          <input type="email" name="email" id="email" placeholder="juan@example.com" value="{{ old('email', $user->email)}}">
-
-           <br>
-          <label for="password">Password:</label>
-          <input type="password" name="password" id="password" placeholder="mayor a 6 caracteres" value="{{ old('password')}}">
-
-           <br>
-          <button type="submit">Actualizar Usuario</button>
+        <label for="name">Nombre:</label>
+        <input type="text" name="name" id="name" placeholder="Pedro Perez" value="{{ old('name', $user->name) }}">
+        <br>
+        <label for="email">Correo electrónico:</label>
+        <input type="email" name="email" id="email" placeholder="pedro@example.com" value="{{ old('email', $user->email) }}">
+        <br>
+        <label for="password">Contraseña:</label>
+        <input type="password" name="password" id="password" placeholder="Mayor a 6 caracteres">
+        <br>
+        <button type="submit">Actualizar usuario</button>
 
         </form>
 
