@@ -228,35 +228,61 @@ class UsersModuleTest extends TestCase
      function the_email_must_be_unique_when_updating_the_user()
   {
 
-         self::markTestIncomplete();
-        return;
+          factory(User::class)->create([
+                'email' => 'existing-email@example.com',
+]);
+
       $user = factory(User::class)->create([
             'email' => 'duilioo@styde.net'
         ]);
         $this->from("usuarios/{$user->id}/editar")->put("usuarios/{$user->id}", [
             'name' =>'Charlie',
-            'email' => 'duilioo@styde.net',
+            'email' => 'existing-email@example.com',
             'password' => '123456'
-        ])->assertRedirect('usuarios/nuevo')
+        ])->assertRedirect("usuarios/{$user->id}/editar")
           ->assertSessionHasErrors(['email']);
-
-        $this->assertEquals(1, User::count());
 
 
  }
-
 /** @test*/
-     function the_password_is_required_when_updating_the_user()
+ function the_email_stay_the_same_when_updating_the_user()
+{
+
+$user = factory(User::class)->create([
+      'email' => 'deulios@gmail.net'
+]);
+$this->from("usuarios/{$user->id}/editar")->put("usuarios/{$user->id}", [
+        'name' =>'Charlie Mendoza',
+        'email' => 'deulios@gmail.net',
+        'password' => '12345678'
+    ])->assertRedirect("usuarios/{$user->id}");
+
+    $this->assertDatabaseHas('users', [
+         'name' =>'Charlie Mendoza',
+         'email' => 'deulios@gmail.net',
+]);
+
+
+}
+/** @test*/
+     function the_password_is_iptional_when_updating_the_user()
   {
-$user = factory(User::class)->create();
+   $oldPassword= 'CLAVE_ANTERIOR';
+$user = factory(User::class)->create([
+          'password' => bcrypt($oldPassword)
+
+]);
   $this->from("usuarios/{$user->id}/editar")->put("usuarios/{$user->id}", [
             'name' =>'Charlie',
             'email' => 'deulios@gmail.net',
             'password' => ''
-        ])->assertRedirect("usuarios/{$user->id}/editar")
-          ->assertSessionHasErrors(['password']);
+        ])->assertRedirect("usuarios/{$user->id}");
 
-        $this->assertDatabaseMissing('users', ['email' => 'deulios@gmail.net']);
+        $this->assertCredentials([
+             'name' =>'Charlie',
+             'email' => 'deulios@gmail.net',
+             'password' => $oldPassword
+]);
 
 
  }

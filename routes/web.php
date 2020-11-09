@@ -13,7 +13,8 @@ Route::get('/usuarios/{user}', 'UserController@show')
 Route::get('/usuarios/nuevo', 'UserController@create')
       ->name('users.create');
 
-Route::get('/usuarios/{user}/editar', 'UserController@edit')->name('users.edit');
+Route::get('/usuarios/{user}/editar', 'UserController@edit')
+      ->name('users.edit');
 
 Route::put('/usuarios/{user}', 'UserController@update');
 

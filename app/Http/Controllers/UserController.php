@@ -55,21 +55,25 @@ Public function edit(User $user)
   {
         return view('users.edit', ['user' => $user]);
   }
+
+
 Public function update(User $user)
   {
       $data = request()->validate([
        'name' => 'required',
-       'email' => 'required|email',
-       'password' => 'required',
-
-
+       'email' => 'required|email|unique:users,email,'. $user->id,
+       'password' => '',
 ]);
+        if ($data['password'] != null) {
+            $data['password'] = bcrypt($data['password']);
 
-      $data['password'] = bcrypt($data['password']);
-
+   } else {
+          unset($data['password']);
+          }
       $user->update($data);
 
         return redirect()->route('users.show', ['users ' => $user]);
+
 
 
   }
